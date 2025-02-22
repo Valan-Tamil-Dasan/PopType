@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/SFML_Project.dir/main.cpp.o -o SFML_Project  /usr/lib64/libsfml-graphics.so.2.6.2 /usr/lib64/libsfml-window.so.2.6.2 /usr/lib64/libsfml-system.so.2.6.2
