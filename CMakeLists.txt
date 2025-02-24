@@ -13,6 +13,7 @@ add_executable(game
     src/main.cpp 
     src/Game.cpp 
     src/Player.cpp
+    src/Enemy.cpp
 )
 
 target_link_libraries(game sfml-graphics sfml-window sfml-system)
