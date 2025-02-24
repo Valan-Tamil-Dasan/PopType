@@ -15,12 +15,21 @@ int::Game::findIndex(char ch){
   }return -1; 
 }
 
+void Game :: loadText(){
+  font.loadFromFile("../assets/font.ttf");
+  text.setFont(font);
+  text.setCharacterSize(30.f);
+  text.setFillColor(sf::Color::White);
+  text.setPosition(windowWidth - 500.f , 100.f);
+}
+
 Game::Game(int _windowWidth, int _windowHeight) 
     : windowWidth(_windowWidth), 
       windowHeight(_windowHeight), 
       window(sf::VideoMode(windowWidth, windowHeight), "PopType"),
       player(30.f, sf::Vector2f(windowWidth / 2, windowHeight / 2))
 {
+   loadText(); 
 }
 
 void Game::run() {
@@ -41,6 +50,7 @@ void Game::processEvents() {
                 char pressedChar = static_cast<char>(event.key.code + 'a'); 
                 int index = findIndex(pressedChar);
                 if(index != -1){
+                  score += 10;
                   destructEnemies(index);
                 }
             }
@@ -72,6 +82,8 @@ void Game::render() {
     for(auto & enemy : enemies){
       enemy->show(window);
     }
+    text.setString("SCORE: "+std::to_string(score));
+    window.draw(text);
     window.display();
 }
 

@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Clock.hpp>
 #include <vector>
 #include <memory>
@@ -15,6 +16,9 @@ private:
     Player player;
     std::vector<std::unique_ptr<Enemy>> enemies;
     sf::Clock spawnClock,gameClock;
+    sf::Font font;
+    sf::Text text;
+    int score = 0;
     float spawnInterval = 1.0f;
     float minimumSpawnInterval = 0.3f;
     /*float decreaseSpawnInterval = 0.01f;*/
@@ -25,6 +29,7 @@ private:
     void destructEnemies(int index);
     char generateRandomChar();
     int findIndex(char ch);
+    void loadText();
 public:
     Game(int windowWidth , int windowHeight);
     void run();
