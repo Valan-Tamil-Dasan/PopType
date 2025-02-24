@@ -37,6 +37,14 @@ sf::Vector2f Enemy:: getRandomSpawnPosition() {
   return sf::Vector2f(x, y);
 }
 
+void Enemy :: loadText(){
+  font.loadFromFile("../assets/font.ttf");
+  text.setFont(font);
+  text.setString("E");
+  text.setCharacterSize(radius);
+  text.setFillColor(sf::Color::White);
+}
+
 Enemy::Enemy(int _windowWidth , int _windowHeight){
   windowWidth = _windowWidth;
   windowHeight = _windowHeight;
@@ -49,18 +57,17 @@ Enemy::Enemy(int _windowWidth , int _windowHeight){
 
   sf::Vector2f spawnPoint = getRandomSpawnPosition();
   shape.setPosition(spawnPoint); 
+
+  loadText();
 }
 
 void Enemy::show(sf::RenderWindow& window){
-  processEvents();
+  updatePosition();
   window.draw(shape);
+  window.draw(text);
 }
 
-void Destruct(){
-          
-}
-
-void Enemy::processEvents() {
+void Enemy::updatePosition() {
   sf::Vector2f currentPos = shape.getPosition();
   sf::Vector2f direction(center.x - currentPos.x, center.y - currentPos.y);
   float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
@@ -69,4 +76,7 @@ void Enemy::processEvents() {
 
   direction /= distance;
   shape.move(direction * 0.05f);
+  
+  text.setPosition(shape.getPosition().x - radius/2 , shape.getPosition().y - radius / 2);
+  
 }
