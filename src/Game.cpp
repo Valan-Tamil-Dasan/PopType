@@ -7,6 +7,14 @@ char :: Game :: generateRandomChar(){
   return (char) (rnd + 'a');
 } 
 
+int::Game::findIndex(char ch){
+  for(int i = 0;i<enemies.size();i++){
+    if(ch == enemies[i]->letter){
+      return i; 
+    }
+  }return -1; 
+}
+
 Game::Game(int _windowWidth, int _windowHeight) 
     : windowWidth(_windowWidth), 
       windowHeight(_windowHeight), 
@@ -28,14 +36,28 @@ void Game::processEvents() {
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             window.close();
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code >= sf::Keyboard::A && event.key.code <= sf::Keyboard::Z) {
+                char pressedChar = static_cast<char>(event.key.code + 'a'); 
+                int index = findIndex(pressedChar);
+                if(index != -1){
+                  destructEnemies(index);
+                }
+            }
+        }
     }
+
 }
 
 void Game::spawnEnemies(){
-  if (spawnClock.getElapsedTime().asSeconds() > 1.f) {
-    enemies.push_back(std::make_unique<Enemy> (windowWidth , windowHeight ,generateRandomChar()));
-    spawnClock.restart();
-  }
+    float timeElapsed = gameClock.getElapsedTime().asSeconds();
+
+    spawnInterval = minimumSpawnInterval + (1.0f - minimumSpawnInterval) * std::exp(-decayRate * timeElapsed);
+
+    if (spawnClock.getElapsedTime().asSeconds() > spawnInterval) {
+        enemies.push_back(std::make_unique<Enemy>(windowWidth, windowHeight, generateRandomChar()));
+        spawnClock.restart();
+    }
 } 
 
 void Game::destructEnemies(int index){
@@ -53,9 +75,3 @@ void Game::render() {
     window.display();
 }
 
-// vector of Enemies
-// when created it is pushed
-// when poped it needs to be removed from the vector
-// enemy remove function need to be done on enemy class
-// Here remove from the vector and and call Enemy.end function
-// lets see when a key is pressed I need to pop one out

@@ -14,12 +14,17 @@ private:
     sf::RenderWindow window;
     Player player;
     std::vector<std::unique_ptr<Enemy>> enemies;
-    sf::Clock spawnClock;
+    sf::Clock spawnClock,gameClock;
+    float spawnInterval = 1.0f;
+    float minimumSpawnInterval = 0.3f;
+    /*float decreaseSpawnInterval = 0.01f;*/
+    float decayRate = 0.01f;
     void render();
     void processEvents();
     void spawnEnemies();
     void destructEnemies(int index);
     char generateRandomChar();
+    int findIndex(char ch);
 public:
     Game(int windowWidth , int windowHeight);
     void run();

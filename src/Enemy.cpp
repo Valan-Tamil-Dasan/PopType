@@ -77,7 +77,9 @@ void Enemy::updatePosition() {
   if (distance < 0.5f) return;
 
   direction /= distance;
-  shape.move(direction * 0.05f);
+  shape.move(direction * speed);
+
+  // try dynamic speed increase to increase difficulty
   
   text.setPosition(shape.getPosition().x - radius/2 , shape.getPosition().y - radius / 2);
   

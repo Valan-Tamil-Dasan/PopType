@@ -17,18 +17,18 @@
 
 class Enemy {
 private:
-  char letter;
   float radius = 30.f;
   sf::CircleShape shape; 
   sf::Vector2f center;
   int windowWidth , windowHeight;
   sf::Vector2f getRandomSpawnPosition();
-
+  float speed = 0.1f;
   sf::Font font;
   sf::Text text;
   void updatePosition();
   void loadText();
 public:
+  char letter;
   Enemy(int windowWidth , int windowHeight , char letter);
   void show(sf::RenderWindow& window);
 };
