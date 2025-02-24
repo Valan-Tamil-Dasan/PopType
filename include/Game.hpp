@@ -19,6 +19,7 @@ private:
     void processEvents();
     void spawnEnemies();
     void destructEnemies(int index);
+    char generateRandomChar();
 public:
     Game(int windowWidth , int windowHeight);
     void run();

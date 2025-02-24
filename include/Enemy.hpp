@@ -8,6 +8,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <random>
 #include <memory>
+#include <iostream>
 
 // a letter venum
 // movement -> positionla spawn aaganum 
@@ -28,7 +29,7 @@ private:
   void updatePosition();
   void loadText();
 public:
-  Enemy(int windowWidth , int windowHeight);
+  Enemy(int windowWidth , int windowHeight , char letter);
   void show(sf::RenderWindow& window);
 };
 

@@ -2,6 +2,11 @@
 #include <SFML/System/Vector2.hpp>
 #include <memory>
 
+char :: Game :: generateRandomChar(){
+  int rnd = rand() % 26;
+  return (char) (rnd + 'a');
+} 
+
 Game::Game(int _windowWidth, int _windowHeight) 
     : windowWidth(_windowWidth), 
       windowHeight(_windowHeight), 
@@ -28,7 +33,7 @@ void Game::processEvents() {
 
 void Game::spawnEnemies(){
   if (spawnClock.getElapsedTime().asSeconds() > 1.f) {
-    enemies.push_back(std::make_unique<Enemy> (windowWidth , windowHeight));
+    enemies.push_back(std::make_unique<Enemy> (windowWidth , windowHeight ,generateRandomChar()));
     spawnClock.restart();
   }
 } 

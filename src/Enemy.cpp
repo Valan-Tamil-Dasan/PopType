@@ -2,6 +2,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
+#include <string>
 
 // enemy remove function need to be done on enemy class
 
@@ -40,12 +41,12 @@ sf::Vector2f Enemy:: getRandomSpawnPosition() {
 void Enemy :: loadText(){
   font.loadFromFile("../assets/font.ttf");
   text.setFont(font);
-  text.setString("E");
+  text.setString(std::string(1,letter));
   text.setCharacterSize(radius);
   text.setFillColor(sf::Color::White);
 }
 
-Enemy::Enemy(int _windowWidth , int _windowHeight){
+Enemy::Enemy(int _windowWidth , int _windowHeight , char _letter){
   windowWidth = _windowWidth;
   windowHeight = _windowHeight;
   center = sf::Vector2f(windowWidth/2 , windowHeight/2);
@@ -57,7 +58,8 @@ Enemy::Enemy(int _windowWidth , int _windowHeight){
 
   sf::Vector2f spawnPoint = getRandomSpawnPosition();
   shape.setPosition(spawnPoint); 
-
+  
+  letter = _letter;
   loadText();
 }
 
