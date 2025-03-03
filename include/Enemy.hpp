@@ -22,7 +22,7 @@ private:
   sf::Vector2f center;
   int windowWidth , windowHeight;
   sf::Vector2f getRandomSpawnPosition();
-  float speed = 0.1f;
+  float speed = 0.07f; 
   sf::Font font;
   sf::Text text;
   void updatePosition();
@@ -30,6 +30,8 @@ private:
 public:
   char letter;
   Enemy(int windowWidth , int windowHeight , char letter);
+  float getRadius();
+  sf::Vector2f getPosition();
   void show(sf::RenderWindow& window);
 };
 

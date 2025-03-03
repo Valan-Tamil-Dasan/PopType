@@ -8,7 +8,11 @@
 #include <memory>
 #include "Player.hpp"
 #include "Enemy.hpp"
-
+enum class GameState {
+    MENU,
+    PLAYING,
+    GAME_OVER
+};
 class Game {
 private:
     int windowHeight , windowWidth;
@@ -17,8 +21,13 @@ private:
     std::vector<std::unique_ptr<Enemy>> enemies;
     sf::Clock spawnClock,gameClock;
     sf::Font font;
-    sf::Text text;
+    sf::Text scoreText ;
+    sf::Text menuText;
+    sf::Text playText;
+    sf::Text quitText;
+    sf::Text gameOverText;
     int score = 0;
+    int finalScore = 0;
     float spawnInterval = 1.0f;
     float minimumSpawnInterval = 0.3f;
     /*float decreaseSpawnInterval = 0.01f;*/
@@ -30,6 +39,13 @@ private:
     char generateRandomChar();
     int findIndex(char ch);
     void loadText();
+    void resetGame();    
+    void play();
+    void renderMenu();
+    void renderGameOver();
+    void checkGameOver();
+    GameState gameState;
+
 public:
     Game(int windowWidth , int windowHeight);
     void run();

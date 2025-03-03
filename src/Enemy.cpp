@@ -37,7 +37,13 @@ sf::Vector2f Enemy:: getRandomSpawnPosition() {
   }
   return sf::Vector2f(x, y);
 }
+float Enemy :: getRadius(){
+  return radius;
+}
 
+sf::Vector2f  Enemy :: getPosition(){
+  return shape.getPosition();
+}
 void Enemy :: loadText(){
   font.loadFromFile("../assets/font.ttf");
   text.setFont(font);
