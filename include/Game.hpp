@@ -26,6 +26,7 @@ private:
     sf::Text playText;
     sf::Text quitText;
     sf::Text gameOverText;
+    sf::Text finalScoreText;
     int score = 0;
     int finalScore = 0;
     float spawnInterval = 1.0f;

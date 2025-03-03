@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <memory>
+#include <string>
 
 char :: Game :: generateRandomChar(){
   int rnd = rand() % 26;
@@ -30,7 +31,7 @@ void Game :: loadText(){
   menuText.setOrigin(menuBounds.width / 2, menuBounds.height / 2);
   menuText.setFillColor(sf::Color::White);
   menuText.setString("PopType");
-  menuText.setPosition(windowWidth / 2 - 100, 100);
+  menuText.setPosition(windowWidth / 2 - 150, windowHeight / 2 - 200);
 
   playText.setFont(font);
   playText.setCharacterSize(48);
@@ -38,7 +39,7 @@ void Game :: loadText(){
   playText.setOrigin(playBounds.width / 2, playBounds.height / 2);
   playText.setFillColor(sf::Color::Blue);
   playText.setString("Play");
-  playText.setPosition(windowWidth / 2 - 100 , 200);
+  playText.setPosition(windowWidth / 2 - 100 , windowHeight / 2 - 100);
 
   quitText.setFont(font);
   quitText.setCharacterSize(48);
@@ -46,15 +47,21 @@ void Game :: loadText(){
   quitText.setOrigin(quitBounds.width / 2, quitBounds.height/2);
   quitText.setFillColor(sf::Color::Blue);
   quitText.setString("Quit");
-  quitText.setPosition(windowWidth / 2 - 100 , 300);
+  quitText.setPosition(windowWidth / 2 - 100 , windowHeight / 2);
 
   gameOverText.setFont(font);
   gameOverText.setCharacterSize(48);
   sf::FloatRect gameOverBounds = gameOverText.getLocalBounds();
   gameOverText.setOrigin(gameOverBounds.width / 2, gameOverBounds.height/2);
-  gameOverText.setFillColor(sf::Color::Blue);
-  gameOverText.setString("Game Over");
-  gameOverText.setPosition(windowWidth / 2 - 100 , 100);
+  gameOverText.setFillColor(sf::Color::Red);
+  gameOverText.setString("GAME OVER");
+  gameOverText.setPosition(windowWidth / 2 - 200 , windowHeight / 2 - 300);
+
+
+  finalScoreText.setFont(font);
+  finalScoreText.setCharacterSize(48);
+  finalScoreText.setFillColor(sf::Color::White);
+  finalScoreText.setPosition(windowWidth / 2 - 175 , windowHeight/2 - 200);
 }
 
 void Game::checkGameOver() {
@@ -175,8 +182,8 @@ void Game::renderMenu(){
 }
 void Game::renderGameOver(){
   window.draw(gameOverText);
-  scoreText.setString("SCORE: "+std::to_string(finalScore));
-  window.draw(scoreText);
+  finalScoreText.setString("Score: " + std::to_string(finalScore));
+  window.draw(finalScoreText);
   window.draw(playText);
   window.draw(quitText);
 }
